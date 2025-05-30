@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Jogos em Poster</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            padding: 5px;
+            max-width: 690px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            position: relative;
+            width: 340px;
+            height: 170px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .overlay-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .poster {
+            position: relative;
+            width: 770px;
+            height: 900px;
+            background-color: #1a1a1a;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .poster-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .input-section {
+            width: 770px;
+            height: 300px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            background-color: #3d5afe;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #536dfe;
+            transform: translateY(-2px);
+        }
+        
+        .btn-copy {
+            background-color: #00c853;
+        }
+        
+        .btn-copy:hover {
+            background-color: #00e676;
+        }
+        
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+        
+        .input-group {
+            margin-bottom: 10px;
+        }
+        
+        input, textarea {
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .poster-content {
+            position: relative;
+            z-index: 1;
+            padding: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .poster-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            width: 100%;
+        }
+        
+        .poster-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .date-display {
+            font-size: 1.25rem;
+            margin-top: 5px;
+            color: #e0e0e0;
+        }
+        
+        #toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div id="toast">Poster copiado para a área de transferência!</div>
+    
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-400">Gerenciador de Jogos em Poster</h1>
+        
+        <!-- Seção 1: Inserção de dados (sem título) -->
+        <div class="input-section">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <div class="input-group">
+                        <label for="date" class="block mb-1">Data:</label>
+                        <input type="date" id="date" class="w-full">
+                    </div>
+                    
+                    <div class="input-group mt-4">
+                        <label class="block mb-1">Links das Imagens:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <input type="text" id="card1" placeholder="Card 1" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                                <input type="text" id="card2" placeholder="Card 2" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                                <input type="text" id="card3" placeholder="Card 3" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                                <input type="text" id="card4" placeholder="Card 4" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                            </div>
+                            <div>
+                                <input type="text" id="card5" placeholder="Card 5" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                                <input type="text" id="card6" placeholder="Card 6" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                                <input type="text" id="card7" placeholder="Card 7" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                                <input type="text" id="card8" placeholder="Card 8" value="https://i.imgur.com/iJ9DVgd.jpeg" class="mb-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col justify-center items-center">
+                    <button id="generateBtn" class="btn mb-4 w-48">Gerar Poster</button>
+                    <button id="copyBtn" class="btn btn-copy mb-4 w-48">Copiar Poster</button>
+                    <button id="whatsappBtn" class="btn btn-whatsapp w-48">Enviar para WhatsApp</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção 2: Visualização do Poster (sem título) -->
+        <div id="poster" class="poster">
+            <img src="https://i.imgur.com/MRnM7o0.png" alt="Background" class="poster-bg">
+            
+            <div class="poster-content">
+                <div class="poster-header">
+                    <h2 class="text-3xl font-bold text-white">Programação de Jogos</h2>
+                    <div class="date-display" id="posterDate"></div>
+                </div>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <img id="posterCard1" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 1">
+                    </div>
+                    <div class="card">
+                        <img id="posterCard2" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 2">
+                    </div>
+                    <div class="card">
+                        <img id="posterCard3" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 3">
+                    </div>
+                    <div class="card">
+                        <img id="posterCard4" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 4">
+                    </div>
+                    <div class="card">
+                        <img id="posterCard5" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 5">
+                    </div>
+                    <div class="card">
+                        <img id="posterCard6" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 6">
+                    </div>
+                    <div class="card">
+                        <img id="posterCard7" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 7">
+                    </div>
+                    <div class="card">
+                        <img id="posterCard8" src="https://i.imgur.com/iJ9DVgd.jpeg" alt="Jogo 8">
+                    </div>
+                </div>
+                
+                <img src="https://i.imgur.com/sn94giv.png" alt="Overlay" class="overlay-image">
+                
+                <div class="poster-footer">
+                    <p>Os canais podem mudar sua programação de última hora sem aviso prévio, aproveite está tabela com os jogos mais importante do dia, servidores P2x, P2 Server e RTv.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Definir a data atual como padrão
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        document.getElementById('date').value = formattedDate;
+        
+        // Formatar a data para exibição
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        document.getElementById('posterDate').textContent = today.toLocaleDateString('pt-BR', options);
+        
+        // Função para mostrar o toast de notificação
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Função para gerar o poster
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            // Atualizar a data
+            const selectedDate = new Date(document.getElementById('date').value);
+            document.getElementById('posterDate').textContent = selectedDate.toLocaleDateString('pt-BR', options);
+            
+            // Atualizar as imagens dos cards
+            for (let i = 1; i <= 8; i++) {
+                const cardUrl = document.getElementById(`card${i}`).value;
+                document.getElementById(`posterCard${i}`).src = cardUrl;
+            }
+            
+            showToast('Poster gerado com sucesso!');
+        });
+        
+        // Função para copiar o poster para a área de transferência
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            // Usar html2canvas para capturar apenas o poster
+            html2canvas(document.getElementById('poster'), {
+                useCORS: true,  // Importante para carregar imagens de outros domínios
+                scale: 2,       // Melhor qualidade
+                backgroundColor: null
+            }).then(canvas => {
+                // Tentar copiar para a área de transferência usando a Clipboard API
+                canvas.toBlob(blob => {
+                    try {
+                        // Método moderno usando Clipboard API
+                        const item = new ClipboardItem({ 'image/png': blob });
+                        navigator.clipboard.write([item]).then(() => {
+                            showToast('Poster copiado para a área de transferência!');
+                        }).catch(err => {
+                            console.error('Erro ao copiar para a área de transferência:', err);
+                            fallbackCopyMethod(canvas);
+                        });
+                    } catch (err) {
+                        console.error('Erro ao usar Clipboard API:', err);
+                        fallbackCopyMethod(canvas);
+                    }
+                });
+            });
+        });
+        
+        // Método alternativo para copiar (download)
+        function fallbackCopyMethod(canvas) {
+            const image = canvas.toDataURL('image/png');
+            
+            // Criar um elemento temporário para download
+            const link = document.createElement('a');
+            link.href = image;
+            link.download = 'programacao-jogos.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('Poster baixado como imagem! (Não foi possível copiar para a área de transferência)');
+        }
+        
+        // Função para compartilhar no WhatsApp
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            html2canvas(document.getElementById('poster'), {
+                useCORS: true,
+                scale: 2,
+                backgroundColor: null
+            }).then(canvas => {
+                canvas.toBlob(function(blob) {
+                    // Criar um objeto File a partir do Blob
+                    const file = new File([blob], "programacao-jogos.png", { type: "image/png" });
+                    
+                    // Verificar se o navegador suporta o Web Share API
+                    if (navigator.share && navigator.canShare({ files: [file] })) {
+                        navigator.share({
+                            title: 'Programação de Jogos',
+                            text: 'Confira a programação de jogos de hoje!',
+                            files: [file]
+                        }).catch(error => {
+                            console.log('Erro ao compartilhar:', error);
+                            fallbackWhatsAppShare(canvas);
+                        });
+                    } else {
+                        fallbackWhatsAppShare(canvas);
+                    }
+                });
+            });
+        });
+        
+        // Método alternativo para compartilhar no WhatsApp
+        function fallbackWhatsAppShare(canvas) {
+            const image = canvas.toDataURL('image/png');
+            
+            // Baixar a imagem primeiro
+            const link = document.createElement('a');
+            link.href = image;
+            link.download = 'programacao-jogos.png';
+            link.click();
+            
+            // Tentar abrir o WhatsApp Web
+            setTimeout(() => {
+                const text = 'Confira a programação de jogos de hoje!';
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+                showToast('Imagem baixada! Abra o WhatsApp para compartilhar a imagem.');
+            }, 1000);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'947dffb88134e2d5',t:'MTc0ODYwNTY2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

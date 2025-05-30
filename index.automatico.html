@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programação de Jogos</title>
+    <link rel="icon" href="https://i.imgur.com/0ll2lR2.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .poster {
+            width: 770px;
+            height: 900px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 0px;
+        }
+        
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 90.7;
+            z-index: 1;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .cards-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+        
+        .card img {
+            width: 430px;
+            height: 175px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .overlay-image {
+            position: absolute;
+            top: 100%;
+            left: 100%;
+            transform: translate(-99%, -99%);
+            z-index: 3;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+        
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            color: #f0f0f0;
+            padding: 4px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            font-size: 18px;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <!-- Background Image -->
+        <img src="img/fundo.png" alt="Background" class="background">
+        
+        <div class="content">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="text-4xl font-bold mb-1">Programação de Jogos</h1>
+				<p class="text-2xl font-regular mb-3" id="current-date"></p>
+		    <!-- <p class="text-2xl font-regular mb-3" id="current-date"></p>  pega a data automáticamente -->
+			<!-- <h1 class="text-2xl font-regular mb-3">quinta-feira, 29 de maio de 2025</h1>  data colocada manualmente -->
+            </div>
+
+            <!-- Cards Container -->
+            <div class="cards-container">
+                <!-- Row 1: Card 1 and Card 2 -->
+                <div class="cards-row">
+                    <!-- Card 1 -->
+                    <div class="card">
+                        <img src="img/01.png" alt="Game 1">
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="card">
+                        <img src="img/02.png" alt="Game 2">
+                    </div>
+                </div>
+                
+                <!-- Row 2: Card 3 and Card 4 -->
+                <div class="cards-row">
+                    <!-- Card 3 -->
+                    <div class="card">
+                        <img src="img/03.png" alt="Game 3">
+                    </div>
+                    
+                    <!-- Card 4 -->
+                    <div class="card">
+                        <img src="img/04.png" alt="Game 4">
+                    </div>
+                </div>
+                
+                <!-- Row 3: Card 5 and Card 6 -->
+                <div class="cards-row">
+                    <!-- Card 5 -->
+                    <div class="card">
+                        <img src="img/05.png" alt="Game 5">
+                    </div>
+                    
+                    <!-- Card 6 -->
+                    <div class="card">
+                        <img src="img/06.png" alt="Game 6">
+                    </div>
+                </div>
+                
+                <!-- Row 4: Card 7 and Card 8 -->
+                <div class="cards-row">
+                    <!-- Card 7 -->
+                    <div class="card">
+                        <img src="img/07.png" alt="Game 7">
+                    </div>
+                    
+                    <!-- Card 8 -->
+                    <div class="card">
+                        <img src="img/08.png" alt="Game 8">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Overlay Image -->
+            <img src="https://i.imgur.com/sn94giv.png" alt="Overlay" class="overlay-image">
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>Os canais podem mudar sua programação de última hora sem aviso prévio, aproveite está tabela com os jogos mais importante do dia, servidores P2x, P2 Server e RTv!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Set current date in Portuguese format
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', options);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942c0c0e8228e2a7',t:'MTc0Nzc0NjM0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

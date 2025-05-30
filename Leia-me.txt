@@ -1,0 +1,30 @@
+
+✓ Crie um gerenciador de jogos em Poster em HTML.
+✓ Crie a Sessão 1, inserção de dados, esta sessão deve ter 770x300px de dimensão.
+✓ Preciso de um botão Copiar onde ao clicar nele vai copiar tudo construído na Sessão 2 em formato PNG ou JPEG o que for melhor, insira essas imagens abaixo na sessão 2.
+✓ Card 1, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Card 2, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Card 3, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Card 4, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Card 5, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Card 6, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Card 7, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Card 8, https://i.imgur.com/iJ9DVgd.jpeg
+✓ Crie a Sessão 2, entre com os dados fornecidos na Sessão 1, esta sessão 2 deve ter o tamanho  de 770x900px dimensão 
+✓ Preciso de um campo acima para inserir os links da imagens, Modificar a data começando sempre pela data atual e um botão para copiar a área construída e enviar para whatsapp
+✓ Topo: Programação de Jogos - "Data fornecida na sessão 1"
+✓ Imagem de fundo: https://i.imgur.com/MRnM7o0.png
+✓ Crie card 1, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 1 Sessão 1" ajustar imagem para 370x170px
+✓ Crie card 2, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 2 Sessão 1" ajustar imagem para 370x170px
+✓ Crie card 3, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 3 Sessão 1" ajustar imagem para 370x170px
+✓ Crie card 4, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 4 Sessão 1" ajustar imagem para 370x170px
+✓ Crie card 5, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 5 Sessão 1" ajustar imagem para 370x170px
+✓ Crie card 6, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 6 Sessão 1" ajustar imagem para 370x170px
+✓ Crie card 7, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 7 Sessão 1" ajustar imagem para 370x170px
+✓ Crie card 8, 370x170px e insira a imagem: "Inserir a imagem fornecida no Card 8 Sessão 1" ajustar imagem para 370x170px
+✓ Carregue a imagem por cima de tudo com uma transparência de 40%, https://i.imgur.com/sn94giv.png
+✓ Rodapé: Os canais podem mudar sua programação de última hora sem aviso prévio, aproveite está tabela com os jogos mais importante do dia, servidores P2x, P2 Server e RTv - @ 2025 Tekinformática.
+✓ A página deve ter um design escuro, moderno e intuitivo.
+✓ Ajuste todas as informações na Sessão 2 de forma organizada dentro do Poster, 770x900px dimenssão
+
+
